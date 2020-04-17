@@ -26,6 +26,7 @@
       "branch": {
           "type": "string",
           "defaultValue": "c-sharp",
+          "allowedValues": ["c-sharp", "master"],
           "metadata": {
               "description": "The branch of the GitHub repository to use."
           }
