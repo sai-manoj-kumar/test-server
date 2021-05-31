@@ -14,11 +14,11 @@ using System.Text;
 
 namespace TestBackendServer.Function
 {
-    public static class HttpTriggerFileDownload
+    public static class HttpTriggerLatency
     {
-        [FunctionName("HttpTriggerFileDOwnload")]
+        [FunctionName("HttpTriggerLatency")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, Route = "file/{size}/")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, Route = "latency/{size}/")] HttpRequest req,
             ILogger log)
         {
             int numberOfKiloBytes;
@@ -32,11 +32,10 @@ namespace TestBackendServer.Function
                 numberOfKiloBytes = 1024;
             }
             string textContent = ResponseHelper.RandomString(numberOfKiloBytes * 1024);
-            byte[] filebytes = Encoding.UTF8.GetBytes(textContent);
 
-            return new FileContentResult(filebytes, "application/octet-stream")
+            return new ContentResult()
             {
-                FileDownloadName = "download.txt"
+                Content = textContent
             };
         }
     }

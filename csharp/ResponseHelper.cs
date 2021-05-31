@@ -24,5 +24,14 @@ namespace TestBackendServer.Function
             
             return properties;
         }
+
+        public static string RandomString(int length)
+        {
+            const string pool = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var chars = Enumerable.Range(0, length)
+                .Select(x => pool[random.Next(0, pool.Length)]);
+            return new string(chars.ToArray());
+        }
     }
 }
