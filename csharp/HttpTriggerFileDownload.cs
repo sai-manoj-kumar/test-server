@@ -16,7 +16,7 @@ namespace TestBackendServer.Function
 {
     public static class HttpTriggerFileDownload
     {
-        [FunctionName("HttpTriggerFileDOwnload")]
+        [FunctionName("HttpTriggerFileDownload")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, Route = "file/{size}/")] HttpRequest req,
             ILogger log)
