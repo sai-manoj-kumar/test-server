@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
 using System;
+using System.Text;
 
 namespace TestBackendServer.Function
 {
@@ -25,13 +26,28 @@ namespace TestBackendServer.Function
             return properties;
         }
 
-        public static string RandomString(int length)
+        public static string RandomString_Old(int length)
         {
             const string pool = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var random = new Random();
             var chars = Enumerable.Range(0, length)
                 .Select(x => pool[random.Next(0, pool.Length)]);
             return new string(chars.ToArray());
+        }
+
+        public static string RandomString(int length)
+        {
+            const string pool = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var builder = new StringBuilder();
+            var random = new Random();
+
+            for (var i = 0; i < length; i++)
+            {
+                var c = pool[random.Next(0, pool.Length)];
+                builder.Append(c);
+            }
+
+            return builder.ToString();
         }
     }
 }
