@@ -35,7 +35,7 @@ namespace TestBackendServer.Function
             return new string(chars.ToArray());
         }
 
-        public static string RandomString(int length)
+        public static string RandomString_Old2(int length)
         {
             const string pool = "abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var builder = new StringBuilder();
@@ -48,6 +48,15 @@ namespace TestBackendServer.Function
             }
 
             return builder.ToString();
+        }
+
+        public static string RandomString(int length)
+        {
+            var bytes = new Byte[length];
+            var random = new Random();
+            random.NextBytes(bytes);
+//            return Convert.ToBase64String(bytes, 0, bytes.Length);
+            return Encoding.ASCII.GetString(bytes, 0, bytes.Length);
         }
     }
 }
