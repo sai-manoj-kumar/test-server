@@ -10,6 +10,13 @@ namespace TestBackendServer.Function
 {
     public static class ResponseHelper
     {
+        private static string bigOutputPool = "";
+
+        static ResponseHelper()
+        {
+            bigOutputPool = RandomString((1024 * 1024 * 100) + 10);
+        }
+
         public static Dictionary<string, string> GetProperties(HttpRequest request)
         {
             
@@ -50,13 +57,19 @@ namespace TestBackendServer.Function
             return builder.ToString();
         }
 
-        public static string RandomString(int length)
+        public static string RandomString(long length)
         {
-            var bytes = new Byte[length];
+            var bytes = new byte[length];
             var random = new Random();
             random.NextBytes(bytes);
-//            return Convert.ToBase64String(bytes, 0, bytes.Length);
-            return Encoding.ASCII.GetString(bytes, 0, bytes.Length);
+            return Convert.ToBase64String(bytes, 0, bytes.Length);
+        }
+
+
+        public static string GenerateString(int count)
+        {
+            int startIndex = new Random().Next(10);
+            return bigOutputPool.Substring(startIndex, count);
         }
     }
 }
